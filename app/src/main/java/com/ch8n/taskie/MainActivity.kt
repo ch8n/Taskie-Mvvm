@@ -1,4 +1,4 @@
-nitpackage com.ch8n.taskie
+package com.ch8n.taskie
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

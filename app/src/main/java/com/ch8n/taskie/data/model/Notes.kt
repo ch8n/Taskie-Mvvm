@@ -9,6 +9,7 @@ sealed class NoteType {
 }
 
 data class Note(
+    val id: String,
     val title: String,
     val description: String,
     val type: NoteType,
@@ -20,14 +21,14 @@ data class Note(
             description: String = "",
             type: NoteType = NoteType.Note,
             createdAt: Long = Calendar.getInstance().timeInMillis
-        ) = Note(title, description, type, createdAt)
+        ) = Note(UUID.randomUUID().toString(), title, description, type, createdAt)
 
         fun defaultTodo(
             title: String = "",
             description: String = "",
             type: NoteType = NoteType.Todo(isCompleted = false),
             createdAt: Long = Calendar.getInstance().timeInMillis
-        ) = Note(title, description, type, createdAt)
+        ) = Note(UUID.randomUUID().toString(), title, description, type, createdAt)
 
         fun fakeNote() = with(Faker.instance()) {
             defaultNote(

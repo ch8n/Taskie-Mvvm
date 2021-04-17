@@ -17,7 +17,7 @@ interface NotesDao {
 
     //######## Select ##########
     @Query("SELECT * FROM NoteEntity")
-    suspend fun getNotes(): LiveData<List<NoteEntity>>
+    fun getNotes(): LiveData<List<NoteEntity>>
 
     //######## Delete ##########
 

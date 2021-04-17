@@ -17,7 +17,7 @@ interface TodoDao {
 
     //######## Select ##########
     @Query("SELECT * FROM TodoEntity")
-    suspend fun getTodos(): LiveData<List<TodoEntity>>
+    fun getTodos(): LiveData<List<TodoEntity>>
 
     //######## Delete ##########
 

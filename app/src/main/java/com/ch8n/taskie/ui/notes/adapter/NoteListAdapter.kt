@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ch8n.taskie.data.model.Note
 import com.ch8n.taskie.data.model.NoteType
+import com.ch8n.taskie.data.utils.showStrikeThrough
 import com.ch8n.taskie.databinding.ItemLayoutNoteBinding
 import com.ch8n.taskie.databinding.ItemLayoutTodoBinding
 
@@ -87,6 +88,10 @@ class TodoViewHolder(
     fun onBind(todo: Note) = with(binding) {
         check.isEnabled = false
         check.isChecked = todo.isCompleted
+        if (check.isChecked) {
+            textTodoTitle.showStrikeThrough(true)
+            textTodoDesc.showStrikeThrough(true)
+        }
         textTodoTitle.text = todo.title
         textTodoDesc.text = todo.description
 

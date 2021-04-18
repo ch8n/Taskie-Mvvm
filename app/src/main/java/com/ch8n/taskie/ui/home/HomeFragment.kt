@@ -3,6 +3,9 @@ package com.ch8n.taskie.ui.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.ch8n.taskie.R
 import com.ch8n.taskie.data.model.Note
 import com.ch8n.taskie.data.utils.ViewBindingFragment
@@ -23,7 +26,8 @@ class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
         get() = FragmentHomeBinding::inflate
 
     private var notePagerAdapter: NotePagerAdapter? = null
-    private val homeViewModel by lazy { Injector.homeVM }
+    private val homeViewModelFactory by lazy { Injector.homeViewModelFactory }
+    private val homeViewModel by viewModels<HomeViewModel> { homeViewModelFactory }
 
     override fun setup() = with(binding) {
         pagerNotes.adapter = NotePagerAdapter(this@HomeFragment.requireActivity())

@@ -3,6 +3,7 @@ package com.ch8n.taskie.ui.notes
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.ch8n.taskie.data.model.Note
 import com.ch8n.taskie.data.model.NoteType
@@ -21,7 +22,8 @@ class NotesFragment : ViewBindingFragment<FragmentNotesBinding>() {
         get() = FragmentNotesBinding::inflate
 
     private var notesAdapter: NoteListAdapter? = null
-    private val notesViewModel by lazy { Injector.noteVM }
+    private val notesViewModelFactory by lazy { Injector.noteViewModelFactory }
+    private val notesViewModel by viewModels<NotesViewModel> { notesViewModelFactory }
 
     override fun setup(): Unit = with(binding) {
 

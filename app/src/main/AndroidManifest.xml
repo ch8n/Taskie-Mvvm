@@ -14,7 +14,8 @@
         android:theme="@style/Theme.Taskie">
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.Taskie">
+            android:theme="@style/Theme.Taskie"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

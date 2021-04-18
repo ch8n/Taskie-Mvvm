@@ -3,6 +3,7 @@ package com.ch8n.taskie.ui.task
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.ch8n.taskie.data.model.Note
 import com.ch8n.taskie.data.model.NoteType
@@ -22,7 +23,8 @@ class TaskFragment : ViewBindingFragment<FragmentNotesBinding>() {
         get() = FragmentNotesBinding::inflate
 
     private var taskAdapter: NoteListAdapter? = null
-    private val taskViewModel by lazy { Injector.taskVM }
+    private val taskViewModelFactory by lazy { Injector.taskViewModelFactory }
+    private val taskViewModel by viewModels<TaskViewModel> { taskViewModelFactory }
     private val taskiePrefs by lazy { Injector.taskiePrefs }
 
     override fun setup(): Unit = with(binding) {

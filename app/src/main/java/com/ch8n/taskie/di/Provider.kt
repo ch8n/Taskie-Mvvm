@@ -11,8 +11,11 @@ import com.ch8n.taskie.data.local.prefs.AppPrefs
 import com.ch8n.taskie.data.repos.NotesRepo
 import com.ch8n.taskie.data.repos.TaskRepo
 import com.ch8n.taskie.ui.home.HomeViewModel
+import com.ch8n.taskie.ui.home.HomeViewModelFactory
 import com.ch8n.taskie.ui.notes.NotesViewModel
+import com.ch8n.taskie.ui.notes.NotesViewModelFactory
 import com.ch8n.taskie.ui.task.TaskViewModel
+import com.ch8n.taskie.ui.task.TaskViewModelFactory
 
 // How Dependency Injection working?
 // checkout my post explaining it in details : https://chetangupta.net/native-di/
@@ -32,18 +35,14 @@ object Provider {
 
     fun provideTodoRepo(taskDao: TaskDao) = TaskRepo(taskDao)
 
+    fun provideNoteViewModelFactory(noteRepo: NotesRepo) = NotesViewModelFactory(noteRepo)
 
-    // TODO build factory
-    fun provideNoteVM(noteRepo: NotesRepo) = NotesViewModel(noteRepo)
+    fun provideTaskViewModelFactory(taskRepo: TaskRepo) = TaskViewModelFactory(taskRepo)
 
-    // TODO build factory
-    fun provideTaskVM(taskRepo: TaskRepo) = TaskViewModel(taskRepo)
-
-    // TODO build factory
-    fun provideHomeVM(
+    fun provideHomeViewModelFactory(
         taskiePrefs: AppPrefs,
         taskRepo: TaskRepo,
         notesRepo: NotesRepo
-    ) = HomeViewModel(taskiePrefs, taskRepo, notesRepo)
+    ) = HomeViewModelFactory(taskiePrefs, taskRepo, notesRepo)
 
 }

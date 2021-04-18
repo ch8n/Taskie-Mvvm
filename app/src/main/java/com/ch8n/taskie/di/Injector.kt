@@ -22,8 +22,8 @@ object Injector {
 
     val taskRepo by lazy { Provider.provideTodoRepo(taskieDB.todoDao()) }
 
-    val noteVM by lazy { Provider.provideNoteVM(notesRepo) }
-    val taskVM by lazy { Provider.provideTaskVM(taskRepo) }
-    val homeVM by lazy { Provider.provideHomeVM(taskiePrefs, taskRepo, notesRepo) }
+    val noteViewModelFactory by lazy { Provider.provideNoteViewModelFactory(notesRepo) }
+    val taskViewModelFactory by lazy { Provider.provideTaskViewModelFactory(taskRepo) }
+    val homeViewModelFactory by lazy { Provider.provideHomeViewModelFactory(taskiePrefs, taskRepo, notesRepo) }
 
 }

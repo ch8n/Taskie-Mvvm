@@ -25,6 +25,8 @@ class NotesFragment : ViewBindingFragment<FragmentNotesBinding>() {
 
     override fun setup(): Unit = with(binding) {
 
+        textGreet.text = "All Your Notes..."
+
         listNotes.adapter = NoteListAdapter.newInstance(
             type = NoteType.Note,
             noteListInteraction = object : NoteListInteraction {

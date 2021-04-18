@@ -23,8 +23,11 @@ class TaskFragment : ViewBindingFragment<FragmentNotesBinding>() {
 
     private var taskAdapter: NoteListAdapter? = null
     private val taskViewModel by lazy { Injector.taskVM }
+    private val taskiePrefs by lazy { Injector.taskiePrefs }
 
     override fun setup(): Unit = with(binding) {
+
+        textGreet.text = "Today's Task ${taskiePrefs.userName.split(" ").first()}!"
 
         listNotes.adapter = NoteListAdapter.newInstance(
             type = NoteType.Todo,

@@ -20,8 +20,9 @@ object Injector {
 
     val notesRepo by lazy { Provider.provideNotesRepo(taskieDB.notesDao()) }
 
-    val todoRepo by lazy { Provider.provideTodoRepo(taskieDB.todoDao()) }
+    val taskRepo by lazy { Provider.provideTodoRepo(taskieDB.todoDao()) }
 
     val noteVM by lazy { Provider.provideNoteVM(notesRepo) }
+    val taskVM by lazy { Provider.provideTaskVM(taskRepo) }
 
 }

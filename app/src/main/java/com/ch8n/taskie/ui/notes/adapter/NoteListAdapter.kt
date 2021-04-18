@@ -57,7 +57,7 @@ class NoteListAdapter private constructor(
 interface NoteListInteraction {
     fun onNoteEditClick(note: Note)
     fun onTodoEditClick(todo: Note)
-    fun onTodoUpdate(todo: Note)
+    fun onTodoUpdate(position: Int)
 }
 
 class NotesViewHolder(
@@ -85,15 +85,27 @@ class TodoViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun onBind(todo: Note) = with(binding) {
-        check.isChecked = (todo.type as NoteType.Todo).isCompleted
+        check.isEnabled = false
+        check.isChecked = todo.isCompleted
         textTodoTitle.text = todo.title
         textTodoDesc.text = todo.description
-        root.setOnLongClickListener {
-            noteListInteraction.onNoteEditClick(todo)
+
+        //TODO fix root click
+        textTodoTitle.setOnLongClickListener {
+            noteListInteraction.onTodoEditClick(todo)
             true
         }
-        root.setOnClickListener {
-            noteListInteraction.onTodoUpdate(todo)
+        textTodoDesc.setOnLongClickListener {
+            noteListInteraction.onTodoEditClick(todo)
+            true
+        }
+
+        //TODO fix root click
+        textTodoTitle.setOnClickListener {
+            noteListInteraction.onTodoUpdate(adapterPosition)
+        }
+        textTodoDesc.setOnClickListener {
+            noteListInteraction.onTodoUpdate(adapterPosition)
         }
     }
 

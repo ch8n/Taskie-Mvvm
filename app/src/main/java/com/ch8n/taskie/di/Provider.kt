@@ -6,11 +6,12 @@ import androidx.room.RoomDatabase
 import com.ch8n.taskie.data.local.database.DB_NAME
 import com.ch8n.taskie.data.local.database.NotesDao
 import com.ch8n.taskie.data.local.database.TaskieDB
-import com.ch8n.taskie.data.local.database.TodoDao
+import com.ch8n.taskie.data.local.database.TaskDao
 import com.ch8n.taskie.data.local.prefs.AppPrefs
 import com.ch8n.taskie.data.repos.NotesRepo
-import com.ch8n.taskie.data.repos.TodoRepo
+import com.ch8n.taskie.data.repos.TaskRepo
 import com.ch8n.taskie.ui.notes.NotesViewModel
+import com.ch8n.taskie.ui.task.TaskViewModel
 
 // How Dependency Injection working?
 // checkout my post explaining it in details : https://chetangupta.net/native-di/
@@ -28,9 +29,12 @@ object Provider {
 
     fun provideNotesRepo(notesDao: NotesDao) = NotesRepo(notesDao)
 
-    fun provideTodoRepo(todoDao: TodoDao) = TodoRepo(todoDao)
+    fun provideTodoRepo(taskDao: TaskDao) = TaskRepo(taskDao)
 
     // TODO build factory
     fun provideNoteVM(noteRepo: NotesRepo) = NotesViewModel(noteRepo)
+
+    // TODO build factory
+    fun provideTaskVM(taskRepo: TaskRepo) = TaskViewModel(taskRepo)
 
 }

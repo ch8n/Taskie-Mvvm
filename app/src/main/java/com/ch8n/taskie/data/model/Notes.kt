@@ -5,7 +5,7 @@ import java.util.*
 
 sealed class NoteType {
     object Note : NoteType()
-    data class Todo(val isCompleted: Boolean) : NoteType()
+    object Todo : NoteType()
 }
 
 data class Note(
@@ -13,22 +13,25 @@ data class Note(
     val title: String,
     val description: String,
     val type: NoteType,
-    val createdAt: Long
+    val createdAt: Long,
+    val isCompleted: Boolean = false
 ) {
     companion object {
         fun defaultNote(
             title: String = "",
             description: String = "",
             type: NoteType = NoteType.Note,
-            createdAt: Long = Calendar.getInstance().timeInMillis
-        ) = Note(UUID.randomUUID().toString(), title, description, type, createdAt)
+            createdAt: Long = Calendar.getInstance().timeInMillis,
+            isCompleted: Boolean = false
+        ) = Note(UUID.randomUUID().toString(), title, description, type, createdAt, isCompleted)
 
         fun defaultTodo(
             title: String = "",
             description: String = "",
-            type: NoteType = NoteType.Todo(isCompleted = false),
-            createdAt: Long = Calendar.getInstance().timeInMillis
-        ) = Note(UUID.randomUUID().toString(), title, description, type, createdAt)
+            type: NoteType = NoteType.Todo,
+            createdAt: Long = Calendar.getInstance().timeInMillis,
+            isCompleted: Boolean = false
+        ) = Note(UUID.randomUUID().toString(), title, description, type, createdAt, isCompleted)
 
         fun fakeNote() = with(Faker.instance()) {
             defaultNote(

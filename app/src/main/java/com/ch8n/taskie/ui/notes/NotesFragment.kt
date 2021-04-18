@@ -34,7 +34,7 @@ class NotesFragment : ViewBindingFragment<FragmentNotesBinding>() {
                 }
 
                 override fun onTodoEditClick(todo: Note) {}
-                override fun onTodoUpdate(todo: Note) {}
+                override fun onTodoUpdate(position: Int) {}
             }
         ).also {
             notesAdapter = it

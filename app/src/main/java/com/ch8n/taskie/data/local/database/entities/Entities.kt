@@ -13,7 +13,7 @@ data class NoteEntity(
 )
 
 @Entity
-data class TodoEntity(
+data class TaskEntity(
     @PrimaryKey
     val id: String,
     val title: String,

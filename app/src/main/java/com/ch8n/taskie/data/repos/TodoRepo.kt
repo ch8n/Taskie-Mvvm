@@ -16,7 +16,7 @@ import kotlinx.coroutines.withContext
 class TodoRepo(private val todoDao: TodoDao) {
 
     fun getTodos(): LiveData<List<Note>> = Transformations.map(todoDao.getTodos()) { todos ->
-        return@map todos.map { it.toTodo() }
+        return@map todos.map { it.toTodo() }.sortedByDescending { it.createdAt }
     }
 
     suspend fun addTodo(note: Note): Result<Unit, Exception> = withContext(Dispatchers.IO) {

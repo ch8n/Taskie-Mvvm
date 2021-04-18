@@ -22,4 +22,6 @@ object Injector {
 
     val todoRepo by lazy { Provider.provideTodoRepo(taskieDB.todoDao()) }
 
+    val noteVM by lazy { Provider.provideNoteVM(notesRepo) }
+
 }

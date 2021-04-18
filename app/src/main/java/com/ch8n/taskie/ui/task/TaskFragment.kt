@@ -2,13 +2,15 @@ package com.ch8n.taskie.ui.task
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import com.ch8n.taskie.data.model.Note
 import com.ch8n.taskie.data.model.NoteType
 import com.ch8n.taskie.data.utils.ViewBindingFragment
 import com.ch8n.taskie.databinding.FragmentNotesBinding
 import com.ch8n.taskie.ui.notes.adapter.NoteListAdapter
 import com.ch8n.taskie.ui.notes.adapter.NoteListInteraction
-import com.ch8n.taskie.ui.notes.dialog.NoteDialog
+
 
 class TaskFragment : ViewBindingFragment<FragmentNotesBinding>() {
 
@@ -47,15 +49,8 @@ class TaskFragment : ViewBindingFragment<FragmentNotesBinding>() {
         )
     }
 
-    private fun applyAddTaskBehaviour(){
-        binding.btnAdd.setOnClickListener {
-            val fragment = childFragmentManager.findFragmentByTag(NoteDialog.TAG)
-            if (fragment != null && fragment is NoteDialog) {
-                fragment.dismiss()
-            }
-            val noteDialog = NoteDialog()
-            noteDialog.show(childFragmentManager, NoteDialog.TAG)
-        }
+    private fun applyAddTaskBehaviour() {
+
     }
 
     override fun onDestroyView() {

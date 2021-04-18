@@ -13,10 +13,10 @@ import kotlinx.coroutines.withContext
 class NotesRepo(private val notesDao: NotesDao) {
 
     fun getNotes(): LiveData<List<Note>> = Transformations.map(notesDao.getNotes()) { notes ->
-        return@map notes.map { it.toNote() }
+        return@map notes.map { it.toNote() }.sortedByDescending { it.createdAt }
     }
 
-    suspend fun addNote(note: Note): Result<Unit, Exception> = withContext(Dispatchers.IO) {
+    suspend fun upsertNote(note: Note): Result<Unit, Exception> = withContext(Dispatchers.IO) {
         return@withContext Result.build { notesDao.addNote(note.toNoteEntity()) }
     }
 

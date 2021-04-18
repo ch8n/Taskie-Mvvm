@@ -67,7 +67,12 @@ class NotesViewHolder(
     fun onBind(note: Note) = with(binding) {
         textNoteTitle.text = note.title
         textNoteDesc.text = note.description
-        root.setOnLongClickListener {
+        // TODO root click not working
+        textNoteTitle.setOnLongClickListener {
+            noteListInteraction.onNoteEditClick(note)
+            true
+        }
+        textNoteDesc.setOnLongClickListener {
             noteListInteraction.onNoteEditClick(note)
             true
         }

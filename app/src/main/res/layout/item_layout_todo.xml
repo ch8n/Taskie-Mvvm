@@ -11,8 +11,11 @@
         android:layout_height="match_parent"
         android:gravity="start|center_horizontal"
         android:orientation="horizontal"
-        android:paddingBottom="48dp"
-        android:padding="16dp">
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        >
 
         <FrameLayout
             android:layout_marginStart="8dp"
@@ -27,6 +30,7 @@
 
         <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/check"
+            android:button="@drawable/checkbox"
             android:layout_width="36dp"
             android:layout_height="36dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,8 +52,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 tools:text="@tools:sample/lorem" />
@@ -58,8 +62,8 @@
                 android:id="@+id/text_todo_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:padding="8dp"
                 android:textColor="@color/white"
                 android:textSize="14sp"

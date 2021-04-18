@@ -13,6 +13,7 @@ import com.ch8n.taskie.ui.notes.adapter.NoteListAdapter
 import com.ch8n.taskie.ui.notes.adapter.NoteListInteraction
 import com.ch8n.taskie.ui.notes.dialog.NoteDialog
 import com.ch8n.taskie.ui.notes.dialog.NoteDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 
 
 class TaskFragment : ViewBindingFragment<FragmentNotesBinding>() {
@@ -48,7 +49,7 @@ class TaskFragment : ViewBindingFragment<FragmentNotesBinding>() {
 
         taskViewModel.prompts.observe(viewLifecycleOwner, Observer {
             it ?: return@Observer
-            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            Snackbar.make(root, it, Snackbar.LENGTH_LONG).show()
         })
 
         taskViewModel.getTask().observe(viewLifecycleOwner, Observer {

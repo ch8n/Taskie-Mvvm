@@ -7,6 +7,7 @@ import com.ch8n.taskie.data.utils.ViewBindingFragment
 import com.ch8n.taskie.databinding.FragmentHomeBinding
 import com.ch8n.taskie.ui.home.adapter.NotePagerAdapter
 import com.ch8n.taskie.ui.home.adapter.ZoomOutPageTransformer
+import com.google.android.material.tabs.TabLayoutMediator
 
 
 class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
@@ -20,6 +21,10 @@ class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
         pagerNotes.adapter = NotePagerAdapter(this@HomeFragment.requireActivity())
             .also { notePagerAdapter = it }
         pagerNotes.setPageTransformer(ZoomOutPageTransformer())
+        TabLayoutMediator(tabs, pagerNotes) { tab, position ->
+            tab.text = notePagerAdapter?.getTabName(position)
+        }.attach()
+
         applyBackPressBehaviour()
     }
 

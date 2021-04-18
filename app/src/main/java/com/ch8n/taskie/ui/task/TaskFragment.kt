@@ -25,8 +25,6 @@ class TaskFragment : ViewBindingFragment<FragmentNotesBinding>() {
 
     override fun setup(): Unit = with(binding) {
 
-        applyAddTaskBehaviour()
-
         listNotes.adapter = NoteListAdapter.newInstance(
             type = NoteType.Todo,
             noteListInteraction = object : NoteListInteraction {
@@ -60,7 +58,7 @@ class TaskFragment : ViewBindingFragment<FragmentNotesBinding>() {
 
     }
 
-    private fun applyAddTaskBehaviour() {
+    fun openCreateTaskDialog() {
         val taskCreateDialog = NoteDialog()
         val dialogBuilder = NoteDialogBuilder(
             noteType = NoteType.Todo,
@@ -72,14 +70,13 @@ class TaskFragment : ViewBindingFragment<FragmentNotesBinding>() {
 
         taskCreateDialog.setDialogBuilder(dialogBuilder)
 
-        binding.btnAdd.setOnClickListener {
-            val fragment = childFragmentManager.findFragmentByTag(NoteDialog.TAG)
-            if (fragment != null && fragment is NoteDialog) {
-                fragment.dismiss()
-            }
-            taskCreateDialog.show(childFragmentManager, NoteDialog.TAG)
+        val fragment = childFragmentManager.findFragmentByTag(NoteDialog.TAG)
+        if (fragment != null && fragment is NoteDialog) {
+            fragment.dismiss()
         }
+        taskCreateDialog.show(childFragmentManager, NoteDialog.TAG)
     }
+
 
     private fun applyAddModifyBehaviour(task: Note) {
         val taskEditDialog = NoteDialog()

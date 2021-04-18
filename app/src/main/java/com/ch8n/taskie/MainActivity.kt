@@ -11,6 +11,7 @@ class MainActivity : ViewBindingActivity<ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
     }
 
     override val bindingInflater: (LayoutInflater) -> ActivityMainBinding

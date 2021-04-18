@@ -3,6 +3,7 @@ package com.ch8n.taskie.ui.home.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.ch8n.taskie.R
 import com.ch8n.taskie.ui.notes.NotesFragment
 import com.ch8n.taskie.ui.task.TaskFragment
 
@@ -18,7 +19,7 @@ class NotePagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activi
         return fragments.keys.toList().get(position)
     }
 
-    fun getFragment(position: Int):Fragment {
+    fun getFragment(position: Int): Fragment {
         return fragments.values.toList().get(position)
     }
 

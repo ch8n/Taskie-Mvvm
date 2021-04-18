@@ -9,28 +9,30 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="300dp"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleGravity="bottom"
-            app:expandedTitleMarginEnd="48dp"
-            app:expandedTitleMarginStart="64dp"
-            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
+            app:expandedTitleMarginEnd="16dp"
+            app:expandedTitleMarginStart="16dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:title="@string/app_name">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/toolbar_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="100dp"
                 android:fitsSystemWindows="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background"
+                android:scaleType="centerInside"
                 app:layout_collapseMode="parallax" />
 
             <com.google.android.material.tabs.TabLayout
@@ -40,7 +42,9 @@
                 android:layout_gravity="bottom"
                 android:background="@null"
                 app:layout_collapseMode="pin"
-                app:tabMode="scrollable" />
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/pink"
+                app:tabTextColor="#000000" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -50,5 +54,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_add" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

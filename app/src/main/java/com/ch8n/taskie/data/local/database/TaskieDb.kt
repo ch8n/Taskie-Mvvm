@@ -17,8 +17,3 @@ abstract class TaskieDB : RoomDatabase() {
 }
 
 const val DB_NAME = "taskie_db"
-
-class AppDB(private val database: TaskieDB) {
-    val notesDao: NotesDao by lazy { database.notesDao() }
-    val taskDao: TaskDao by lazy { database.todoDao() }
-}

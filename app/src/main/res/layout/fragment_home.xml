@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/black"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -33,6 +34,7 @@
                 android:layout_marginStart="100dp"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerInside"
+                android:src="@drawable/unboxing"
                 app:layout_collapseMode="parallax" />
 
             <com.google.android.material.tabs.TabLayout

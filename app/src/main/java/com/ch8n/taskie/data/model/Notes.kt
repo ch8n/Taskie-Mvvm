@@ -25,7 +25,7 @@ data class Note(
             isCompleted: Boolean = false
         ) = Note(UUID.randomUUID().toString(), title, description, type, createdAt, isCompleted)
 
-        fun defaultTodo(
+        fun defaultTask(
             title: String = "",
             description: String = "",
             type: NoteType = NoteType.Todo,
@@ -41,7 +41,7 @@ data class Note(
         }
 
         fun fakeTodo() = with(Faker.instance()) {
-            defaultTodo(
+            defaultTask(
                 title = dragonBall().character(),
                 description = this.lorem().sentence()
             )

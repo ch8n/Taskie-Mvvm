@@ -10,6 +10,7 @@ import com.ch8n.taskie.data.local.database.TaskDao
 import com.ch8n.taskie.data.local.prefs.AppPrefs
 import com.ch8n.taskie.data.repos.NotesRepo
 import com.ch8n.taskie.data.repos.TaskRepo
+import com.ch8n.taskie.ui.home.HomeViewModel
 import com.ch8n.taskie.ui.notes.NotesViewModel
 import com.ch8n.taskie.ui.task.TaskViewModel
 
@@ -31,10 +32,18 @@ object Provider {
 
     fun provideTodoRepo(taskDao: TaskDao) = TaskRepo(taskDao)
 
+
     // TODO build factory
     fun provideNoteVM(noteRepo: NotesRepo) = NotesViewModel(noteRepo)
 
     // TODO build factory
     fun provideTaskVM(taskRepo: TaskRepo) = TaskViewModel(taskRepo)
+
+    // TODO build factory
+    fun provideHomeVM(
+        taskiePrefs: AppPrefs,
+        taskRepo: TaskRepo,
+        notesRepo: NotesRepo
+    ) = HomeViewModel(taskiePrefs, taskRepo, notesRepo)
 
 }

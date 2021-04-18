@@ -4,8 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import com.ch8n.taskie.R
+import com.ch8n.taskie.data.model.Note
 import com.ch8n.taskie.data.utils.ViewBindingFragment
 import com.ch8n.taskie.databinding.FragmentHomeBinding
+import com.ch8n.taskie.di.Injector
 import com.ch8n.taskie.ui.home.adapter.NotePagerAdapter
 import com.ch8n.taskie.ui.home.adapter.ZoomOutPageTransformer
 import com.ch8n.taskie.ui.notes.NotesFragment
@@ -21,6 +23,7 @@ class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
         get() = FragmentHomeBinding::inflate
 
     private var notePagerAdapter: NotePagerAdapter? = null
+    private val homeViewModel by lazy { Injector.homeVM }
 
     override fun setup() = with(binding) {
         pagerNotes.adapter = NotePagerAdapter(this@HomeFragment.requireActivity())
@@ -32,7 +35,13 @@ class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
         applyFabClickBehaviour()
         applyBackPressBehaviour()
         applyTabChangeBehaviour()
+        applyAppFirstTimeBehaviour()
     }
+
+    private fun applyAppFirstTimeBehaviour() {
+        homeViewModel.oneTimeSetup()
+    }
+
 
     private fun applyTabChangeBehaviour() {
         val images = listOf<Int>(
@@ -43,11 +52,11 @@ class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
             R.drawable.sitting_reading,
             R.drawable.unboxing,
         )
-        binding.tabs.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
+        binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                    Picasso.get()
-                        .load(images.random())
-                        .into(binding.toolbarImage)
+                Picasso.get()
+                    .load(images.random())
+                    .into(binding.toolbarImage)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {

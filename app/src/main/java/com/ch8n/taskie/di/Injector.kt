@@ -24,5 +24,6 @@ object Injector {
 
     val noteVM by lazy { Provider.provideNoteVM(notesRepo) }
     val taskVM by lazy { Provider.provideTaskVM(taskRepo) }
+    val homeVM by lazy { Provider.provideHomeVM(taskiePrefs, taskRepo, notesRepo) }
 
 }

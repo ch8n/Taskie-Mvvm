@@ -60,7 +60,7 @@ class NoteDialog : ViewBindingBottomSheet<DialogAddNoteBinding>() {
                         title = editTitle.text.toString(),
                         description = editDesc.text.toString()
                     )
-                    is NoteType.Todo -> Note.defaultTodo(
+                    is NoteType.Todo -> Note.defaultTask(
                         title = editTitle.text.toString(),
                         description = editDesc.text.toString()
                     )

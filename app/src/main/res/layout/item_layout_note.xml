@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:maxHeight="300dp"
         android:layout_margin="16dp"
-        app:cardBackgroundColor="#c4c4c4"
+        app:cardBackgroundColor="@color/pink_background"
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,6 +32,7 @@
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
                     android:paddingTop="16dp"
+                    android:textColor="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -39,6 +40,7 @@
                     tools:text="@tools:sample/lorem" />
 
                 <TextView
+                    android:textColor="@color/white"
                     android:id="@+id/text_note_desc"
                     android:padding="8dp"
                     android:layout_marginStart="16dp"
@@ -46,6 +48,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
+                    android:layout_marginBottom="8dp"
                     tools:text="@tools:sample/lorem/random" />
 
 

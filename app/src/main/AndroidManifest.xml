@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ch8n.taskie">
 
+
+
     <application
         android:name=".TaskieApp"
         android:allowBackup="true"

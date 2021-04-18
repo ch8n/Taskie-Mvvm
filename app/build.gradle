@@ -47,6 +47,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.github.javafaker:javafaker:1.0.2'
 
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
+
     implementation 'com.squareup.picasso:picasso:2.71828'
 
     def lifecycle_version = "2.3.1"

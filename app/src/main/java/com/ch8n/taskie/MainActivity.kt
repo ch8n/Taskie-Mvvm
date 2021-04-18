@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import com.ch8n.taskie.data.utils.ViewBindingActivity
 import com.ch8n.taskie.databinding.ActivityMainBinding
 import com.ch8n.taskie.ui.home.HomeFragment
+import com.ch8n.taskie.ui.login.LoginFragment
+import com.ch8n.taskie.ui.router.Router
 
-class MainActivity : ViewBindingActivity<ActivityMainBinding>() {
+class MainActivity : ViewBindingActivity<ActivityMainBinding>(), Router {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -18,9 +20,20 @@ class MainActivity : ViewBindingActivity<ActivityMainBinding>() {
         get() = ActivityMainBinding::inflate
 
     override fun setup(): Unit = with(binding) {
+        toLoginScreen()
+    }
+
+    override fun toLoginScreen() {
         supportFragmentManager
             .beginTransaction()
-            .add(container.id, HomeFragment())
+            .add(binding.container.id, LoginFragment())
+            .commit()
+    }
+
+    override fun toHomeScreen() {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(binding.container.id, HomeFragment())
             .commit()
     }
 }

@@ -12,6 +12,8 @@ import com.ch8n.taskie.data.local.prefs.AppPrefs
 import com.ch8n.taskie.data.repos.NotesRepo
 import com.ch8n.taskie.data.repos.TodoRepo
 
+// How Dependency Injection working?
+// checkout my post explaining it in details : https://chetangupta.net/native-di/
 object Provider {
 
     fun provideRoomDBClient(applicationContext: Context): RoomDatabase.Builder<TaskieDB> =

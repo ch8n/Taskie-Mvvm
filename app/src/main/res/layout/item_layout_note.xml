@@ -7,31 +7,14 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
+        android:maxHeight="300dp"
         android:layout_margin="16dp"
         app:cardBackgroundColor="#c4c4c4"
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            app:cardCornerRadius="24dp"
-            android:layout_margin="16dp"
-            android:layout_gravity="end|bottom"
-            >
-
-            <ImageView
-                android:padding="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_edit"
-                />
-
-        </androidx.cardview.widget.CardView>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -43,6 +26,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
+                    android:id="@+id/text_note_title"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:paddingStart="16dp"
@@ -55,6 +39,7 @@
                     tools:text="@tools:sample/lorem" />
 
                 <TextView
+                    android:id="@+id/text_note_desc"
                     android:padding="8dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"

@@ -23,7 +23,7 @@ class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
         applyBackPressBehaviour()
     }
 
-    fun applyBackPressBehaviour() = with(binding) {
+    private fun applyBackPressBehaviour() = with(binding) {
         requireActivity().onBackPressedDispatcher.addCallback(
             /* LifecycleOwner*/this@HomeFragment,
             object : OnBackPressedCallback(true) {

@@ -38,7 +38,7 @@ data class Note(
         }
 
         fun fakeTodo() = with(Faker.instance()) {
-            defaultNote(
+            defaultTodo(
                 title = dragonBall().character(),
                 description = this.lorem().sentence()
             )

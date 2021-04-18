@@ -5,7 +5,7 @@ which has the following features:
 - [ ] Use fragments for different screens.
 - [ ] When a user starts the app, 
     - [ ] a login screen appears (if the user is not logged in). 
-    - [ ] Login can only happen through Google.
+    - [ ] Login can only happen through `Google`.
     - [ ] Use shared preferences/ SQLite to track logged-in users.
 - [ ] Once the user logs in, display all notes of the logged-in user (complete notes, not preview). 
 - [ ] Use Recyclerview to display notes.

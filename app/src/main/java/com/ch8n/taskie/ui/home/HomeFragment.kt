@@ -51,6 +51,9 @@ class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
             R.drawable.reading,
             R.drawable.sitting_reading,
             R.drawable.unboxing,
+            R.drawable.clumsy,
+            R.drawable.dancing,
+            R.drawable.fly,
         )
         binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {

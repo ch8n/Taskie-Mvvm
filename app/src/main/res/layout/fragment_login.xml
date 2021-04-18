@@ -1,44 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/pink"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/pink">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img6"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="352dp"
+        android:src="@drawable/meditating"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/img1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img5"
+        android:layout_width="200dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="215dp"
+        android:layout_marginBottom="205dp"
+        android:src="@drawable/fly"
+        app:layout_constraintBottom_toBottomOf="@+id/img3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img4"
+        app:layout_constraintVertical_bias="0.99" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img4"
+        android:layout_width="270dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="107dp"
+        android:layout_marginEnd="125dp"
+        android:src="@drawable/dancing"
+        app:layout_constraintBottom_toTopOf="@+id/text_app_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/img1"
+        app:layout_constraintTop_toBottomOf="@+id/img1" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img3"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/unboxing"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/img2"
+         />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img1"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginEnd="129dp"
+        android:src="@drawable/sleek"
+        app:layout_constraintBottom_toTopOf="@+id/img4"
+        app:layout_constraintEnd_toStartOf="@+id/img6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="100dp"
+        android:src="@drawable/clumsy"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/img3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_chetan" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text_app_name"
         android:layout_width="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:text="Taskie"
-        android:textSize="48sp"
         android:textColor="@color/white"
+        android:textSize="48sp"
         android:textStyle="bold"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text_chetan"
         android:layout_width="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/text_app_name"
-        app:layout_constraintStart_toStartOf="@id/text_app_name"
-        app:layout_constraintEnd_toEndOf="@id/text_app_name"
         android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginBottom="9dp"
         android:text="Chetan Gupta"
-        android:textSize="18sp"
         android:textColor="@color/white"
+        android:textSize="18sp"
         android:textStyle="bold"
-        />
+        app:layout_constraintEnd_toEndOf="@id/text_app_name"
+        app:layout_constraintStart_toStartOf="@id/text_app_name"
+        app:layout_constraintTop_toBottomOf="@id/text_app_name" />
+
+    <ProgressBar
+        android:id="@+id/loader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_chetan" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_chetan"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_chetan" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

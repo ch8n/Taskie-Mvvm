@@ -2,6 +2,7 @@ package com.ch8n.taskie.ui.login
 
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import com.ch8n.taskie.data.utils.ViewBindingFragment
 import com.ch8n.taskie.databinding.FragmentLoginBinding
@@ -15,6 +16,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
+import java.util.logging.Handler
 
 
 class LoginFragment : ViewBindingFragment<FragmentLoginBinding>() {
@@ -29,17 +31,12 @@ class LoginFragment : ViewBindingFragment<FragmentLoginBinding>() {
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentLoginBinding
         get() = FragmentLoginBinding::inflate
 
-    override fun setup() = runBlocking {
-
-
-
-
-//        if (takiePrefs.isLogin) {
-//            router.toHomeScreen()
-//            return@runBlocking
-//        }
+    override fun setup()  {
 
         binding.signInButton.setSize(SignInButton.SIZE_WIDE);
+        binding.signInButton.visibility = View.GONE
+        binding.loader.visibility = View.VISIBLE
+
         binding.signInButton.setOnClickListener {
             val account = GoogleSignIn.getLastSignedInAccount(requireContext())
             if (account != null) {
@@ -55,6 +52,17 @@ class LoginFragment : ViewBindingFragment<FragmentLoginBinding>() {
                 startActivityForResult(signInIntent, SIGN_IN)
             }
         }
+
+
+        android.os.Handler().postDelayed({
+            if (takiePrefs.isLogin) {
+                router.toHomeScreen()
+            }else{
+                binding.loader.visibility = View.GONE
+                binding.signInButton.visibility = View.VISIBLE
+            }
+        },2000)
+
     }
 
     fun onAccountInfo(account: GoogleSignInAccount?) = with(takiePrefs) {
@@ -67,7 +75,12 @@ class LoginFragment : ViewBindingFragment<FragmentLoginBinding>() {
         socialId = account.id ?: ""
         avatarUrl = account.photoUrl?.toString() ?: ""
         isLogin = true
-        router.toHomeScreen()
+        android.os.Handler().postDelayed({
+            binding.loader.visibility = View.VISIBLE
+            binding.signInButton.visibility = View.GONE
+            router.toHomeScreen()
+        },2000)
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

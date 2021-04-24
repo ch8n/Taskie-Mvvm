@@ -53,7 +53,7 @@ jobs:
           name: apk
           path: app/build/outputs/apk/debug/**.apk
 
-      - name: Send mail
+      - name: Send mail 📧
         uses: dawidd6/action-send-mail@v2
         with:
           server_address: smtp.gmail.com

@@ -49,6 +49,7 @@ class LoginFragment : ViewBindingFragment<FragmentLoginBinding>() {
                         .build()
                 val signInClient = GoogleSignIn.getClient(requireContext(), googleSignInOptions);
                 val signInIntent: Intent = signInClient.signInIntent
+                // TODO migrate to new callback API
                 startActivityForResult(signInIntent, SIGN_IN)
             }
         }

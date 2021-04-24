@@ -1,0 +1,67 @@
+name: Build code on Pull request
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    cron:  '0 0 * * *'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checking out project
+        uses: actions/checkout@v2
+
+      - name: Gradle cache restore
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+            restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Run Debug Tests
+        run: ./gradlew testDebugUnitTest --continue
+
+      - name: Upload Test Reports
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-reports
+          path: '**/build/reports/tests/'
+
+      - name: Run Debug Lint
+        run: ./gradlew lintDebug
+
+      - name: Upload Lint Reports
+        uses: actions/upload-artifact@v2
+        with:
+          name: lint-report
+          path: '**/build/reports/lint-results-*'
+
+      - name: Assemble Debug
+        run: ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: apk
+          path: app/build/outputs/apk/debug/**.apk
+
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: Build apks for taskie 😘
+          body: Build job of ${{github.repository}} completed successfully!
+          to: chetan.garg36@gmail.com,harsh.sidana@gmail.com
+          from: dev.ch8n@gmail.com
+          attachments: '**/build/reports/tests/','**/build/reports/tests/',app/build/outputs/apk/debug/**.apk

@@ -1,18 +1,16 @@
 # Taskie - A Note Taking MVVM Application! 
 ### Designed a simple Notes Android app following features
-- [x] Use only 1 activity for the entire app. 
-- [x] Use fragments for different screens.
-- [x] When a user starts the app, 
-    - [x] a login screen appears (if the user is not logged in). 
-    - [x] Login can only happen through `Google`.
-    - [x] Use shared preferences/ SQLite to track logged-in users.
-- [x] Once the user logs in, display all notes of the logged-in user (complete notes, not preview). 
-- [x] Use Recyclerview to display notes.
-- [x] Add a button to add a new note.
-- [x] Note should contain a title and description
-- [x] Note can be plain text-based or TODO list
-- [x] Allow users to update a note.
-- [x] Allow the user to delete a note.
+- A simple Notes Android app following features
+- Single activity architecture
+- Social login: Google Sign-in 
+- Shared preferences
+- Jetpack Room Database
+- Fragment + Recycler View + ViewPager2 + Collapsable Layout 
+    - List of Todos
+    - List of Notes
+- Floating action button + bottom sheets 
+    - adding Todos | Notes
+- features Create | Update | Delete Todos and Notes
 
 ## Preview
 

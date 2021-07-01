@@ -17,7 +17,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "GOOGLE_CLIENT_ID", google_signin_server_client_id)
+        //buildConfigField("String", "GOOGLE_CLIENT_ID", google_signin_server_client_id)
     }
 
     buildFeatures.viewBinding = true
@@ -49,7 +49,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.github.javafaker:javafaker:1.0.2'
 
-    implementation 'com.google.android.gms:play-services-auth:19.0.0'
+    //implementation 'com.google.android.gms:play-services-auth:19.0.0'
 
     implementation 'com.squareup.picasso:picasso:2.71828'
 

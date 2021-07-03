@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.ch8n.taskie.data.model.Note
 import com.ch8n.taskie.data.model.NoteType
 import com.ch8n.taskie.data.utils.ViewBindingFragment
@@ -23,6 +24,8 @@ class NotesFragment : ViewBindingFragment<FragmentNotesBinding>() {
     private var notesAdapter: NoteListAdapter? = null
     private val notesViewModelFactory by lazy { Injector.noteViewModelFactory }
     private val notesViewModel by viewModels<NotesViewModel> { notesViewModelFactory }
+
+    private val router by lazy { findNavController() }
 
     override fun setup(): Unit = with(binding) {
 
@@ -55,7 +58,6 @@ class NotesFragment : ViewBindingFragment<FragmentNotesBinding>() {
     }
 
     fun openCreateNoteDialog(note: Note) {
-        val noteDialog = NoteDialog()
         val noteDialogBuilder = NoteDialogBuilder(
             noteType = NoteType.Note,
             actionEditOrDelete = false,
@@ -64,17 +66,12 @@ class NotesFragment : ViewBindingFragment<FragmentNotesBinding>() {
                 notesViewModel.addNote(newNote)
             }
         )
-        noteDialog.setDialogBuilder(noteDialogBuilder)
-
-        val fragment = childFragmentManager.findFragmentByTag(NoteDialog.TAG)
-        if (fragment != null && fragment is NoteDialog) {
-            fragment.dismiss()
-        }
-        noteDialog.show(childFragmentManager, NoteDialog.TAG)
+        val gotoNoteDialog =
+            NotesFragmentDirections.actionNotesFragmentToNoteDialog(noteDialogBuilder)
+        router.navigate(gotoNoteDialog)
     }
 
     private fun applyAddModifyBehaviour(note: Note) {
-        val noteDialog = NoteDialog()
         val noteDialogBuilder = NoteDialogBuilder(
             noteType = NoteType.Note,
             actionEditOrDelete = true,
@@ -86,12 +83,9 @@ class NotesFragment : ViewBindingFragment<FragmentNotesBinding>() {
                 notesViewModel.updateNote(modifyNode)
             }
         )
-        noteDialog.setDialogBuilder(noteDialogBuilder)
-        val fragment = childFragmentManager.findFragmentByTag(NoteDialog.TAG)
-        if (fragment != null && fragment is NoteDialog) {
-            fragment.dismiss()
-        }
-        noteDialog.show(childFragmentManager, NoteDialog.TAG)
+        val gotoNoteDialog = NotesFragmentDirections
+                .actionNotesFragmentToNoteDialog(noteDialogBuilder)
+        router.navigate(gotoNoteDialog)
     }
 
 

@@ -1,13 +1,18 @@
 package com.ch8n.taskie.data.model
 
+import android.os.Parcelable
 import com.github.javafaker.Faker
+import kotlinx.parcelize.Parcelize
 import java.util.*
 
-sealed class NoteType {
+sealed class NoteType : Parcelable {
+    @Parcelize
     object Note : NoteType()
+    @Parcelize
     object Todo : NoteType()
 }
 
+@Parcelize
 data class Note(
     val id: String,
     val title: String,
@@ -15,7 +20,7 @@ data class Note(
     val type: NoteType,
     val createdAt: Long,
     val isCompleted: Boolean = false
-) {
+): Parcelable {
     companion object {
         fun defaultNote(
             title: String = "",
@@ -46,7 +51,5 @@ data class Note(
                 description = this.lorem().sentence()
             )
         }
-
-
     }
 }

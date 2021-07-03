@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.ch8n.taskie.data.model.Note
 import com.ch8n.taskie.data.model.NoteType
 import com.ch8n.taskie.data.utils.ViewBindingFragment
@@ -11,7 +12,6 @@ import com.ch8n.taskie.databinding.FragmentNotesBinding
 import com.ch8n.taskie.di.Injector
 import com.ch8n.taskie.ui.notes.adapter.NoteListAdapter
 import com.ch8n.taskie.ui.notes.adapter.NoteListInteraction
-import com.ch8n.taskie.ui.notes.dialog.NoteDialog
 import com.ch8n.taskie.ui.notes.dialog.NoteDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
@@ -25,6 +25,7 @@ class TaskFragment : ViewBindingFragment<FragmentNotesBinding>() {
     private val taskViewModelFactory by lazy { Injector.taskViewModelFactory }
     private val taskViewModel by viewModels<TaskViewModel> { taskViewModelFactory }
     private val taskiePrefs by lazy { Injector.taskiePrefs }
+    private val router by lazy { findNavController() }
 
     override fun setup(): Unit = with(binding) {
 
@@ -64,9 +65,6 @@ class TaskFragment : ViewBindingFragment<FragmentNotesBinding>() {
     }
 
     fun openCreateTaskDialog(note: Note) {
-
-        val taskCreateDialog = NoteDialog()
-
         val dialogBuilder = NoteDialogBuilder(
             noteType = NoteType.Todo,
             note = note,
@@ -76,18 +74,13 @@ class TaskFragment : ViewBindingFragment<FragmentNotesBinding>() {
             }
         )
 
-        taskCreateDialog.setDialogBuilder(dialogBuilder)
-
-        val fragment = childFragmentManager.findFragmentByTag(NoteDialog.TAG)
-        if (fragment != null && fragment is NoteDialog) {
-            fragment.dismiss()
-        }
-        taskCreateDialog.show(childFragmentManager, NoteDialog.TAG)
+        val gotoNoteDialog = TaskFragmentDirections
+            .actionTaskFragmentToNoteDialog(dialogBuilder)
+        router.navigate(gotoNoteDialog)
     }
 
 
     private fun applyAddModifyBehaviour(task: Note) {
-        val taskEditDialog = NoteDialog()
         val dialogBuilder = NoteDialogBuilder(
             noteType = NoteType.Note,
             actionEditOrDelete = true,
@@ -99,12 +92,9 @@ class TaskFragment : ViewBindingFragment<FragmentNotesBinding>() {
                 taskViewModel.updateTask(modifyTask)
             }
         )
-        taskEditDialog.setDialogBuilder(dialogBuilder)
-        val fragment = childFragmentManager.findFragmentByTag(NoteDialog.TAG)
-        if (fragment != null && fragment is NoteDialog) {
-            fragment.dismiss()
-        }
-        taskEditDialog.show(childFragmentManager, NoteDialog.TAG)
+        val gotoNoteDialog = TaskFragmentDirections
+            .actionTaskFragmentToNoteDialog(dialogBuilder)
+        router.navigate(gotoNoteDialog)
     }
 
     override fun onDestroyView() {

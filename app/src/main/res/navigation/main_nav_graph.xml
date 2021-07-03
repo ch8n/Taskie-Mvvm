@@ -25,18 +25,30 @@
         android:id="@+id/taskFragment"
         android:name="com.ch8n.taskie.ui.task.TaskFragment"
         android:label="TaskFragment"
-        tools:layout="@layout/fragment_notes" />
+        tools:layout="@layout/fragment_notes" >
+        <action
+            android:id="@+id/action_taskFragment_to_noteDialog"
+            app:destination="@id/noteDialog" />
+    </fragment>
 
     <fragment
         android:id="@+id/notesFragment"
         android:name="com.ch8n.taskie.ui.notes.NotesFragment"
         android:label="NotesFragment"
-        tools:layout="@layout/fragment_notes" />
+        tools:layout="@layout/fragment_notes" >
+        <action
+            android:id="@+id/action_notesFragment_to_noteDialog"
+            app:destination="@id/noteDialog" />
+    </fragment>
 
     <dialog
         android:id="@+id/noteDialog"
         android:name="com.ch8n.taskie.ui.notes.dialog.NoteDialog"
         android:label="NoteDialog"
-        tools:layout="@layout/dialog_add_note" />
+        tools:layout="@layout/dialog_add_note" >
+        <argument
+            android:name="dialogBuilder"
+            app:argType="com.ch8n.taskie.ui.notes.dialog.NoteDialogBuilder" />
+    </dialog>
 
 </navigation>

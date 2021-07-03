@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/pink">
+    android:background="@color/pink"
+    tools:context=".ui.login.LoginFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img6"
@@ -48,8 +49,7 @@
         android:src="@drawable/unboxing"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/img2"
-         />
+        app:layout_constraintStart_toEndOf="@+id/img2" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img1"
@@ -113,13 +113,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_chetan" />
 
-<!--    <com.google.android.gms.common.SignInButton-->
-<!--        android:id="@+id/sign_in_button"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/text_chetan" />-->
+    <!--    <com.google.android.gms.common.SignInButton-->
+    <!--        android:id="@+id/sign_in_button"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/text_chetan" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

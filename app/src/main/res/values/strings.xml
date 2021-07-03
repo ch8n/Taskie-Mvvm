@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Taskie</string>
+    <string name="class_nav_host_fragment">androidx.navigation.fragment.NavHostFragment</string>
 </resources>

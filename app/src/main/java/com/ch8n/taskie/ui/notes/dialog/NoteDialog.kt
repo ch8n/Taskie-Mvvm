@@ -12,6 +12,7 @@ import com.ch8n.taskie.databinding.DialogAddNoteBinding
 
 data class NoteDialogBuilder(
     val noteType: NoteType,
+    val note: Note,
     val actionEditOrDelete: Boolean,
     val onNoteAddListener: (Note) -> Unit = {},
     val onNoteCancelListener: () -> Unit = {},
@@ -30,21 +31,16 @@ class NoteDialog : ViewBindingBottomSheet<DialogAddNoteBinding>() {
         builderLiveData.value = builder
     }
 
-    val modifyNote = MutableLiveData<Note>()
-
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> DialogAddNoteBinding
         get() = DialogAddNoteBinding::inflate
 
     override fun setup(): Unit = with(binding) {
-
-        modifyNote.observe(viewLifecycleOwner, Observer {
-            it?:return@Observer
-            editTitle.setText(it.title)
-            editDesc.setText(it.description)
-        })
-
+        
         builderLiveData.observe(viewLifecycleOwner, Observer { builder ->
             builder ?: return@Observer
+
+            editTitle.setText(builder.note.title)
+            editDesc.setText(builder.note.description)
 
             if (builder.actionEditOrDelete) {
                 containerUpdate.visibility = View.VISIBLE
@@ -75,13 +71,13 @@ class NoteDialog : ViewBindingBottomSheet<DialogAddNoteBinding>() {
             }
 
             btnDelete.setOnClickListener {
-                val deleteNote = modifyNote.value ?: return@setOnClickListener
+                val deleteNote = builder.note
                 builder.onNoteDeleteListener.invoke(deleteNote)
                 dismiss()
             }
 
             btnUpdate.setOnClickListener {
-                val note = modifyNote.value ?: return@setOnClickListener
+                val note = builder.note
                 val updatedNote = note.copy(
                     title = editTitle.text.toString(),
                     description = editDesc.text.toString()

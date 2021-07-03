@@ -2,7 +2,6 @@ package com.ch8n.taskie.ui.task
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.ch8n.taskie.data.model.Note
@@ -64,10 +63,13 @@ class TaskFragment : ViewBindingFragment<FragmentNotesBinding>() {
 
     }
 
-    fun openCreateTaskDialog() {
+    fun openCreateTaskDialog(note: Note) {
+
         val taskCreateDialog = NoteDialog()
+
         val dialogBuilder = NoteDialogBuilder(
             noteType = NoteType.Todo,
+            note = note,
             actionEditOrDelete = false,
             onNoteAddListener = { newTask ->
                 taskViewModel.addTask(newTask)
@@ -86,14 +88,13 @@ class TaskFragment : ViewBindingFragment<FragmentNotesBinding>() {
 
     private fun applyAddModifyBehaviour(task: Note) {
         val taskEditDialog = NoteDialog()
-        taskEditDialog.modifyNote.value = task
-
         val dialogBuilder = NoteDialogBuilder(
             noteType = NoteType.Note,
             actionEditOrDelete = true,
             onNoteDeleteListener = { deleteTask ->
                 taskViewModel.deleteTask(deleteTask)
             },
+            note = task,
             onNoteEditListener = { modifyTask ->
                 taskViewModel.updateTask(modifyTask)
             }

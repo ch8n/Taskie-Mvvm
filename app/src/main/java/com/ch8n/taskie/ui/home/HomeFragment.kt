@@ -4,8 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.ch8n.taskie.R
 import com.ch8n.taskie.data.model.Note
 import com.ch8n.taskie.data.utils.ViewBindingFragment
@@ -37,7 +35,7 @@ class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
             tab.text = notePagerAdapter?.getTabName(position)
         }.attach()
         applyFabClickBehaviour()
-        applyBackPressBehaviour()
+        //applyBackPressBehaviour()
         applyTabChangeBehaviour()
         applyAppFirstTimeBehaviour()
     }
@@ -82,9 +80,10 @@ class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
         btnAdd.setOnClickListener {
             val visiblePosition = pagerNotes.currentItem
             val fragment = notePagerAdapter?.getFragment(visiblePosition)
+            val placeholderNote = Note.defaultNote("super awesome work!", description = "tell me more about it?")
             when (fragment) {
-                is NotesFragment -> fragment.openCreateNoteDialog()
-                is TaskFragment -> fragment.openCreateTaskDialog()
+                is NotesFragment -> fragment.openCreateNoteDialog(placeholderNote)
+                is TaskFragment -> fragment.openCreateTaskDialog(placeholderNote)
             }
         }
     }
@@ -107,7 +106,8 @@ class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
 
 
     override fun onDestroyView() {
-        super.onDestroyView()
         notePagerAdapter = null
+        binding.pagerNotes.adapter = null
+        super.onDestroyView()
     }
 }

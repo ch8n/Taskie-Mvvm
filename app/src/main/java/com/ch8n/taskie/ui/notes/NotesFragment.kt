@@ -2,7 +2,6 @@ package com.ch8n.taskie.ui.notes
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.ch8n.taskie.data.model.Note
@@ -12,8 +11,8 @@ import com.ch8n.taskie.databinding.FragmentNotesBinding
 import com.ch8n.taskie.di.Injector
 import com.ch8n.taskie.ui.notes.adapter.NoteListAdapter
 import com.ch8n.taskie.ui.notes.adapter.NoteListInteraction
-import com.ch8n.taskie.ui.notes.dialog.NoteDialogBuilder
 import com.ch8n.taskie.ui.notes.dialog.NoteDialog
+import com.ch8n.taskie.ui.notes.dialog.NoteDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
 class NotesFragment : ViewBindingFragment<FragmentNotesBinding>() {
@@ -55,11 +54,12 @@ class NotesFragment : ViewBindingFragment<FragmentNotesBinding>() {
 
     }
 
-    fun openCreateNoteDialog() {
+    fun openCreateNoteDialog(note: Note) {
         val noteDialog = NoteDialog()
         val noteDialogBuilder = NoteDialogBuilder(
             noteType = NoteType.Note,
             actionEditOrDelete = false,
+            note = note,
             onNoteAddListener = { newNote ->
                 notesViewModel.addNote(newNote)
             }
@@ -75,10 +75,10 @@ class NotesFragment : ViewBindingFragment<FragmentNotesBinding>() {
 
     private fun applyAddModifyBehaviour(note: Note) {
         val noteDialog = NoteDialog()
-        noteDialog.modifyNote.value = note
         val noteDialogBuilder = NoteDialogBuilder(
             noteType = NoteType.Note,
             actionEditOrDelete = true,
+            note = note,
             onNoteDeleteListener = { deleteNode ->
                 notesViewModel.deleteNote(deleteNode)
             },

@@ -7,6 +7,7 @@ import com.ch8n.taskie.data.model.Note
 import com.ch8n.taskie.data.repos.NotesRepo
 import com.ch8n.taskie.data.repos.TaskRepo
 import com.ch8n.taskie.di.Injector
+import com.ch8n.taskie.ui.notes.HomeNoteSharedViewModel
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
@@ -35,4 +36,5 @@ class HomeViewModel(
             taskiePrefs.firstTimeLaunch = false
         }
     }
+
 }

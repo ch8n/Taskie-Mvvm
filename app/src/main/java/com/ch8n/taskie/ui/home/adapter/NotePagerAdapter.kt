@@ -1,14 +1,13 @@
 package com.ch8n.taskie.ui.home.adapter
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.ch8n.taskie.R
+import com.ch8n.taskie.ui.home.HomeFragment
 import com.ch8n.taskie.ui.notes.NotesFragment
 import com.ch8n.taskie.ui.task.TaskFragment
 
 
-class NotePagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
+class NotePagerAdapter(homeFragment: HomeFragment) : FragmentStateAdapter(homeFragment) {
 
     private val fragments = mapOf<String, Fragment>(
         "Task" to TaskFragment(),

@@ -2,21 +2,34 @@ package com.ch8n.taskie.ui.task
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.ch8n.taskie.ActivityScopedViewModel
+import com.ch8n.taskie.R
 import com.ch8n.taskie.data.model.Note
 import com.ch8n.taskie.data.model.NoteType
 import com.ch8n.taskie.data.utils.ViewBindingFragment
 import com.ch8n.taskie.databinding.FragmentNotesBinding
 import com.ch8n.taskie.di.Injector
+import com.ch8n.taskie.ui.home.HomeFragmentDirections
 import com.ch8n.taskie.ui.notes.adapter.NoteListAdapter
 import com.ch8n.taskie.ui.notes.adapter.NoteListInteraction
 import com.ch8n.taskie.ui.notes.dialog.NoteDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.consumeAsFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 
 
 class TaskFragment : ViewBindingFragment<FragmentNotesBinding>() {
+
+    companion object {
+        const val TAG = "TaskFragment"
+    }
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentNotesBinding
         get() = FragmentNotesBinding::inflate
@@ -25,7 +38,7 @@ class TaskFragment : ViewBindingFragment<FragmentNotesBinding>() {
     private val taskViewModelFactory by lazy { Injector.taskViewModelFactory }
     private val taskViewModel by viewModels<TaskViewModel> { taskViewModelFactory }
     private val taskiePrefs by lazy { Injector.taskiePrefs }
-    private val router by lazy { findNavController() }
+    private val sharedViewModel: HomeTaskSharedViewModel by activityViewModels<ActivityScopedViewModel>()
 
     override fun setup(): Unit = with(binding) {
 
@@ -62,6 +75,11 @@ class TaskFragment : ViewBindingFragment<FragmentNotesBinding>() {
             taskAdapter?.submitList(it)
         })
 
+        lifecycleScope.launchWhenResumed {
+            sharedViewModel.createNewNote.receiveAsFlow().collect {
+                openCreateTaskDialog(it)
+            }
+        }
     }
 
     fun openCreateTaskDialog(note: Note) {
@@ -74,11 +92,11 @@ class TaskFragment : ViewBindingFragment<FragmentNotesBinding>() {
             }
         )
 
-        val gotoNoteDialog = TaskFragmentDirections
-            .actionTaskFragmentToNoteDialog(dialogBuilder)
-        router.navigate(gotoNoteDialog)
+        findNavController().navigate(
+            R.id.noteDialog,
+            bundleOf("dialogBuilder" to dialogBuilder)
+        )
     }
-
 
     private fun applyAddModifyBehaviour(task: Note) {
         val dialogBuilder = NoteDialogBuilder(
@@ -92,9 +110,10 @@ class TaskFragment : ViewBindingFragment<FragmentNotesBinding>() {
                 taskViewModel.updateTask(modifyTask)
             }
         )
-        val gotoNoteDialog = TaskFragmentDirections
-            .actionTaskFragmentToNoteDialog(dialogBuilder)
-        router.navigate(gotoNoteDialog)
+        findNavController().navigate(
+            R.id.noteDialog,
+            bundleOf("dialogBuilder" to dialogBuilder)
+        )
     }
 
     override fun onDestroyView() {

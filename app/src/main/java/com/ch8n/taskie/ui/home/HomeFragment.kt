@@ -2,8 +2,9 @@ package com.ch8n.taskie.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import com.ch8n.taskie.ActivityScopedViewModel
 import com.ch8n.taskie.R
 import com.ch8n.taskie.data.model.Note
 import com.ch8n.taskie.data.utils.ViewBindingFragment
@@ -11,8 +12,6 @@ import com.ch8n.taskie.databinding.FragmentHomeBinding
 import com.ch8n.taskie.di.Injector
 import com.ch8n.taskie.ui.home.adapter.NotePagerAdapter
 import com.ch8n.taskie.ui.home.adapter.ZoomOutPageTransformer
-import com.ch8n.taskie.ui.notes.NotesFragment
-import com.ch8n.taskie.ui.task.TaskFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.squareup.picasso.Picasso
@@ -26,16 +25,19 @@ class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
     private var notePagerAdapter: NotePagerAdapter? = null
     private val homeViewModelFactory by lazy { Injector.homeViewModelFactory }
     private val homeViewModel by viewModels<HomeViewModel> { homeViewModelFactory }
+    private val sharedViewModel by activityViewModels<ActivityScopedViewModel>()
 
     override fun setup() = with(binding) {
-        pagerNotes.adapter = NotePagerAdapter(this@HomeFragment.requireActivity())
+
+        NotePagerAdapter(this@HomeFragment)
             .also { notePagerAdapter = it }
+            .also { pagerNotes.adapter = it }
+
         pagerNotes.setPageTransformer(ZoomOutPageTransformer())
         TabLayoutMediator(tabs, pagerNotes) { tab, position ->
             tab.text = notePagerAdapter?.getTabName(position)
         }.attach()
         applyFabClickBehaviour()
-        //applyBackPressBehaviour()
         applyTabChangeBehaviour()
         applyAppFirstTimeBehaviour()
     }
@@ -78,30 +80,8 @@ class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
     private fun applyFabClickBehaviour(): Unit = with(binding) {
 
         btnAdd.setOnClickListener {
-            val visiblePosition = pagerNotes.currentItem
-            val fragment = notePagerAdapter?.getFragment(visiblePosition)
-            val placeholderNote = Note.defaultNote("super awesome work!", description = "tell me more about it?")
-            when (fragment) {
-                is NotesFragment -> fragment.openCreateNoteDialog(placeholderNote)
-                is TaskFragment -> fragment.openCreateTaskDialog(placeholderNote)
-            }
+            sharedViewModel.openCreateNoteDialog()
         }
-    }
-
-    private fun applyBackPressBehaviour() = with(binding) {
-        requireActivity().onBackPressedDispatcher.addCallback(
-            /* LifecycleOwner*/this@HomeFragment,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    isEnabled = pagerNotes.currentItem != 0
-                    if (isEnabled) {
-                        pagerNotes.currentItem = pagerNotes.currentItem - 1
-                    } else {
-                        requireActivity().onBackPressed()
-                    }
-                }
-            }
-        )
     }
 
 

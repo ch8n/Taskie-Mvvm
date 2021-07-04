@@ -24,6 +24,12 @@ object Injector {
 
     val noteViewModelFactory by lazy { Provider.provideNoteViewModelFactory(notesRepo) }
     val taskViewModelFactory by lazy { Provider.provideTaskViewModelFactory(taskRepo) }
-    val homeViewModelFactory by lazy { Provider.provideHomeViewModelFactory(taskiePrefs, taskRepo, notesRepo) }
+    val homeViewModelFactory by lazy {
+        Provider.provideHomeViewModelFactory(
+            taskiePrefs,
+            taskRepo,
+            notesRepo
+        )
+    }
 
 }

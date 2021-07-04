@@ -2,11 +2,11 @@ package com.ch8n.taskie.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.ch8n.taskie.ActivityScopedViewModel
 import com.ch8n.taskie.R
-import com.ch8n.taskie.data.model.Note
 import com.ch8n.taskie.data.utils.ViewBindingFragment
 import com.ch8n.taskie.databinding.FragmentHomeBinding
 import com.ch8n.taskie.di.Injector
@@ -84,6 +84,33 @@ class HomeFragment : ViewBindingFragment<FragmentHomeBinding>() {
         }
     }
 
+    fun isOnFirstPagerPage() = with(binding) {
+        val isOnFirst = pagerNotes.currentItem == 0
+        if (!isOnFirst) {
+            pagerNotes.currentItem = pagerNotes.currentItem - 1
+        }
+        return@with isOnFirst
+    }
+
+    private fun applyBackPressBehaviour() = with(binding) {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            /* LifecycleOwner*/this@HomeFragment,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    isEnabled = pagerNotes.currentItem != 0
+                    if (isEnabled) {
+                        pagerNotes.currentItem = pagerNotes.currentItem - 1
+                    } else {
+                        requireActivity().onBackPressed()
+                    }
+                }
+            }
+        )
+    }
+
+    companion object {
+        const val TAG = "HomeFragment"
+    }
 
     override fun onDestroyView() {
         notePagerAdapter = null

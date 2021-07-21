@@ -2,7 +2,6 @@ package com.ch8n.taskie.ui.task
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.ch8n.taskie.data.model.Note

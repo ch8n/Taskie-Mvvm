@@ -3,7 +3,6 @@
     package="com.ch8n.taskie">
 
 
-
     <application
         android:name=".TaskieApp"
         android:allowBackup="true"
@@ -14,8 +13,8 @@
         android:theme="@style/Theme.Taskie">
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.Taskie"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Taskie">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

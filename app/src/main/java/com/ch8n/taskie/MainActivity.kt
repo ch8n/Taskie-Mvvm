@@ -10,16 +10,12 @@ import com.ch8n.taskie.ui.login.LoginFragment
 import com.ch8n.taskie.ui.router.Router
 
 class MainActivity : ViewBindingActivity<ActivityMainBinding>(), Router {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        supportActionBar?.hide()
-    }
 
     override val bindingInflater: (LayoutInflater) -> ActivityMainBinding
         get() = ActivityMainBinding::inflate
 
     override fun setup(): Unit = with(binding) {
+        supportActionBar?.hide()
         toLoginScreen()
     }
 

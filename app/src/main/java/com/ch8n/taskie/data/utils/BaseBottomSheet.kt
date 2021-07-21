@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.ch8n.taskie.R
@@ -52,6 +53,10 @@ abstract class ViewBindingBottomSheet<VB : ViewBinding> : BaseBottomSheet() {
 
 abstract class BaseBottomSheet() : BottomSheetDialogFragment() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.BottomSheetDialogThemeNoFloating)
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val bottomSheetDialog = super.onCreateDialog(savedInstanceState) as? BottomSheetDialog
